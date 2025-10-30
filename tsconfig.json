@@ -1,14 +1,17 @@
 {
-    "compilerOptions": {
+  "compilerOptions": {
     "jsx": "react-jsx",
-      "moduleResolution": "node",
-      "esModuleInterop": true,
-      "allowJs": true,
-      "resolveJsonModule": true,
-      "outDir": "./dist",  
-      "rootDir": "./src"   
-    },
-    "include": ["src/**/*"],  
-    "exclude": ["node_modules"]  
-  }
-  
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "baseUrl": "src",
+    "paths": {
+      "@components/*": ["components/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
