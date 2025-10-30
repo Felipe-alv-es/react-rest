@@ -1,16 +1,19 @@
 import ListItem from "../listItem/ListItem";
 import { Box, Typography } from "@mui/material";
 import { FullWidthBox } from "@components/FullWidthBox/FullWidthBox";
+import { User } from "context/types";
+import { listLabel } from "utils/listLabel";
 import {
   getHomeListStyle,
   getItemContainerStyle,
   getListTitleStyle,
   getTypographyStyle,
 } from "./HomeList.styles";
+interface HomeListTypes {
+  users: User[];
+}
 
-const HomeList = () => {
-  const listLabel = ["Name", "Username", "Email", "Status", "Actions"];
-
+const HomeList = ({ users }: HomeListTypes) => {
   return (
     <Box sx={getHomeListStyle()}>
       <Box sx={getListTitleStyle()}>
@@ -21,72 +24,14 @@ const HomeList = () => {
         ))}
       </Box>
       <Box sx={getItemContainerStyle()}>
-        <ListItem
-          name={"Leanne Graham"}
-          username={"Bret"}
-          email={"Sincere@april.biz"}
-          status={"Banido"}
-        />
-        <ListItem
-          name={"Leanne Graham"}
-          username={"Bret"}
-          email={"Sincere@april.biz"}
-          status={"Banido"}
-        />
-        <ListItem
-          name={"Leanne Graham"}
-          username={"Bret"}
-          email={"Sincere@april.biz"}
-          status={"Banido"}
-        />
-        <ListItem
-          name={"Leanne Graham"}
-          username={"Bret"}
-          email={"Sincere@april.biz"}
-          status={"Banido"}
-        />
-        <ListItem
-          name={"Leanne Graham"}
-          username={"Bret"}
-          email={"Sincere@april.biz"}
-          status={"Banido"}
-        />
-        <ListItem
-          name={"Leanne Graham"}
-          username={"Bret"}
-          email={"Sincere@april.biz"}
-          status={"Banido"}
-        />
-        <ListItem
-          name={"Leanne Graham"}
-          username={"Bret"}
-          email={"Sincere@april.biz"}
-          status={"Banido"}
-        />
-        <ListItem
-          name={"Leanne Graham"}
-          username={"Bret"}
-          email={"Sincere@april.biz"}
-          status={"Banido"}
-        />
-        <ListItem
-          name={"Leanne Graham"}
-          username={"Bret"}
-          email={"Sincere@april.biz"}
-          status={"Banido"}
-        />
-        <ListItem
-          name={"Leanne Graham"}
-          username={"Bret"}
-          email={"Sincere@april.biz"}
-          status={"Banido"}
-        />
-        <ListItem
-          name={"Leanne Graham"}
-          username={"Bret"}
-          email={"Sincere@april.biz"}
-          status={"Banido"}
-        />
+        {users?.map((user) => (
+          <ListItem
+            name={user.name}
+            username={user.username}
+            email={user.email}
+            status={"Banned"}
+          />
+        ))}
       </Box>
     </Box>
   );
