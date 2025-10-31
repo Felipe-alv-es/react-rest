@@ -1,8 +1,8 @@
+import React from "react";
 import { Box, Typography, IconButton, Chip } from "@mui/material";
-import { FaTrashAlt, FaPencilAlt } from "react-icons/fa";
+import { FaTrash, FaPencilAlt } from "react-icons/fa";
 import { getListItemStyle } from "./ListItem.styles";
 import { FullWidthBox } from "@components/full-width-box/FullWidthBox";
-import React from "react";
 import { ConfirmModal } from "../remove-user-confirmation/RemoveUserConfirmation";
 import { User } from "context/types";
 import { UserModal } from "../user-modal/UserModal";
@@ -66,7 +66,7 @@ const ListItem = ({
         ))}
         <FullWidthBox>
           <IconButton onClick={handleDelete}>
-            <FaTrashAlt color="#990000" />
+            <FaTrash color="#990000" />
           </IconButton>
           <IconButton onClick={handleEdit}>
             <FaPencilAlt color="#383838" />
