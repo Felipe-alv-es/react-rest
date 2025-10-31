@@ -49,9 +49,25 @@ const ListItem = ({
       case "Banido":
         return <Chip label={label} color="error" />;
       case "Pendente":
-        return <Chip label={label} color="warning" />;
+        return (
+          <Chip
+            label={label}
+            color="warning"
+            sx={{
+              color: "#ffffff",
+            }}
+          />
+        );
       case "Ativo":
-        return <Chip label={label} color="success" />;
+        return (
+          <Chip
+            label={label}
+            color="success"
+            sx={{
+              color: "#ffffff",
+            }}
+          />
+        );
       default:
         return (
           <Typography
