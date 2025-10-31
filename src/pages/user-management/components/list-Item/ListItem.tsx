@@ -65,10 +65,10 @@ const ListItem = ({
           </FullWidthBox>
         ))}
         <FullWidthBox>
-          <IconButton onClick={handleDelete}>
+          <IconButton onClick={handleDelete} data-testid="delete-button">
             <FaTrash color="#990000" />
           </IconButton>
-          <IconButton onClick={handleEdit}>
+          <IconButton onClick={handleEdit} data-testid="edit-button">
             <FaPencilAlt color="#383838" />
           </IconButton>
         </FullWidthBox>
