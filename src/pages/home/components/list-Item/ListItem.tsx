@@ -1,4 +1,4 @@
-import { Box, Typography, IconButton } from "@mui/material";
+import { Box, Typography, IconButton, Chip } from "@mui/material";
 import { FaTrashRestore, FaPencilAlt } from "react-icons/fa";
 import { getListItemStyle } from "./ListItem.styles";
 import { FullWidthBox } from "@components/full-width-box/FullWidthBox";
@@ -18,11 +18,28 @@ const ListItem = ({ name, username, email, status }: ListItemProps) => {
     { label: status },
   ];
 
+  interface StatusLabelProps {
+    label: string;
+  }
+
+  const LabelComponent: React.FC<StatusLabelProps> = ({ label }) => {
+    switch (label) {
+      case "Banido":
+        return <Chip label={label} color="error" />;
+      case "Pendente":
+        return <Chip label={label} color="warning" />;
+      case "Ativo":
+        return <Chip label={label} color="success" />;
+      default:
+        return <Typography>{label}</Typography>;
+    }
+  };
+
   return (
     <Box sx={getListItemStyle()}>
       {fields.map(({ label }) => (
         <FullWidthBox key={label}>
-          <Typography>{label}</Typography>
+          <LabelComponent label={label} />
         </FullWidthBox>
       ))}
       <FullWidthBox>

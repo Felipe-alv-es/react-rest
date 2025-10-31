@@ -29,7 +29,7 @@ const HomeList = ({ users }: HomeListTypes) => {
             name={user.name}
             username={user.username}
             email={user.email}
-            status={"Banned"}
+            status={"Ativo"}
           />
         ))}
       </Box>

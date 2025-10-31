@@ -26,7 +26,12 @@ export const UsersProvider: React.FC<UsersProviderProps> = ({ children }) => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data: User[] = await response.json();
-      setUsers(data);
+      const usersWithStatus = data.map((user) => ({
+        ...user,
+        status: "Ativo",
+      }));
+
+      setUsers(usersWithStatus);
     } catch (err) {
       setError((err as Error).message);
     } finally {
@@ -42,11 +47,33 @@ export const UsersProvider: React.FC<UsersProviderProps> = ({ children }) => {
     await fetchUsers();
   };
 
+  const sortUsers = (mode: "alph" | "asc" | "desc") => {
+    setUsers((prev) => {
+      if (!prev) return prev;
+      const arr = [...prev];
+      if (mode === "alph") {
+        arr.sort((a, b) =>
+          a.name.localeCompare(b.name, "pt-BR", { sensitivity: "base" })
+        );
+        return arr;
+      }
+      if (mode === "asc") {
+        return arr.sort((a, b) => a.id - b.id);
+      }
+      if (mode === "desc") {
+        return arr.sort((a, b) => b.id - a.id);
+      }
+
+      return arr;
+    });
+  };
+
   const value: UsersContextData = {
     users,
     loading,
     error,
     refresh,
+    sortUsers,
   };
 
   return (

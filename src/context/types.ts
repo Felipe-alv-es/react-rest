@@ -17,6 +17,7 @@ export interface User {
     catchPhrase: string;
     bs: string;
   };
+  status: string;
 }
 
 export interface UsersContextData {
@@ -24,4 +25,5 @@ export interface UsersContextData {
   loading: boolean;
   error: string | null;
   refresh: () => Promise<void>;
+  sortUsers: (mode: "asc" | "desc" | "alph") => void;
 }

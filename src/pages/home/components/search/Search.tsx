@@ -1,16 +1,9 @@
 import { Paper, InputBase, IconButton } from "@mui/material";
 import { IoMdSearch } from "react-icons/io";
 import { getSearchInputStyle, getSearchStyle } from "./Search.styles";
+import { SearchProps } from "pages/home/Home.types";
 
-interface SearchProps {
-  filters: {
-    order: string;
-    status: string;
-    search: string;
-  };
-}
-
-const Search = ({ filters }: SearchProps) => {
+export const Search = ({ filters, setFilters }: SearchProps) => {
   return (
     <Paper
       component="form"
@@ -20,9 +13,11 @@ const Search = ({ filters }: SearchProps) => {
     >
       <InputBase
         sx={getSearchInputStyle()}
-        placeholder="Search"
+        placeholder="Buscar usuário..."
         value={filters.search}
-        onChange={() => undefined}
+        onChange={(e) =>
+          setFilters((prev) => ({ ...prev, search: e.target.value }))
+        }
       />
       <IconButton type="submit">
         <IoMdSearch />
@@ -30,5 +25,3 @@ const Search = ({ filters }: SearchProps) => {
     </Paper>
   );
 };
-
-export default Search;
