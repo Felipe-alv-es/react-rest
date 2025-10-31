@@ -1,8 +1,9 @@
-import HomeFooter from "./components/homeFooter/HomeFooter";
+import HomeFooter from "./components/home-footer/HomeFooter";
 import { Box } from "@mui/material";
 import { getHomeStyle } from "./Home.styles";
 import { HomeList, HomeTitle } from "./components/Index";
 import { useUsers } from "context/UserContext";
+import { CustomizedInputBase } from "./components/home-filter/HomeFilter";
 
 const Home = () => {
   const { users, loading, error } = useUsers();
@@ -16,6 +17,7 @@ const Home = () => {
         title="User Management"
         description="Manage all users in this place, create, edit, and delete them as needed."
       />
+      <CustomizedInputBase />
       <HomeList users={users} />
       <HomeFooter />
     </Box>

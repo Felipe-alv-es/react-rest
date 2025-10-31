@@ -1,2 +1,2 @@
-export { default as HomeTitle } from "./homeTitle/HomeTitle";
-export { default as HomeList } from "./homeList/HomeList";
+export { default as HomeTitle } from "./home-title/HomeTitle";
+export { default as HomeList } from "./home-list/HomeList";

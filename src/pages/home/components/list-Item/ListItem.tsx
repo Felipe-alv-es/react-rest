@@ -1,7 +1,7 @@
 import { Box, Typography, IconButton } from "@mui/material";
 import { FaTrashRestore, FaPencilAlt } from "react-icons/fa";
 import { getListItemStyle } from "./ListItem.styles";
-import { FullWidthBox } from "@components/FullWidthBox/FullWidthBox";
+import { FullWidthBox } from "@components/full-width-box/FullWidthBox";
 
 interface ListItemProps {
   name: string;

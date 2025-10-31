@@ -1,6 +1,6 @@
-import ListItem from "../listItem/ListItem";
+import ListItem from "../list-Item/ListItem";
 import { Box, Typography } from "@mui/material";
-import { FullWidthBox } from "@components/FullWidthBox/FullWidthBox";
+import { FullWidthBox } from "@components/full-width-box/FullWidthBox";
 import { User } from "context/types";
 import { listLabel } from "utils/listLabel";
 import {
