@@ -1,21 +1,22 @@
 import React, { useState } from "react";
 import { Modal, Box, Typography } from "@mui/material";
-import { useUsers } from "context/UserContext";
 import { FormInput } from "@components/form-input/FormInput";
 import { CustomSelect } from "@components/custom-select/CustomSelect";
 import { getModalStyle, getTitleStyle } from "./AddUserModal.styles";
 import { CustomButton } from "@components/custom-button/CustomButton";
+import { User } from "context/types";
 
 interface AddUserModalProps {
   open: boolean;
   onClose: () => void;
+  addUser: (newUser: User) => void;
 }
 
 export const AddUserModal: React.FC<AddUserModalProps> = ({
   open,
   onClose,
+  addUser,
 }) => {
-  const { addUser } = useUsers();
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -56,7 +57,6 @@ export const AddUserModal: React.FC<AddUserModalProps> = ({
 
     addUser(newUser);
     onClose();
-
     setName("");
     setUsername("");
     setEmail("");

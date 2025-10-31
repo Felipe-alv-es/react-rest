@@ -11,9 +11,10 @@ import {
 } from "./HomeList.styles";
 interface HomeListTypes {
   users: User[];
+  removeUser: (id: number) => void;
 }
 
-const HomeList = ({ users }: HomeListTypes) => {
+const HomeList = ({ users, removeUser }: HomeListTypes) => {
   return (
     <Box sx={getHomeListStyle()}>
       <Box sx={getListTitleStyle()}>
@@ -27,10 +28,12 @@ const HomeList = ({ users }: HomeListTypes) => {
         {users?.map((user) => (
           <ListItem
             key={user.id}
+            id={user.id}
             name={user.name}
             username={user.username}
             email={user.email}
             status={user.status}
+            removeUser={removeUser}
           />
         ))}
       </Box>

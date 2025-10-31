@@ -1,3 +1,5 @@
+import { User } from "context/types";
+
 export interface CustomizedInputProps {
   filters: {
     order: string;
@@ -12,6 +14,7 @@ export interface CustomizedInputProps {
     }>
   >;
   handleFilterChange: (key: string, value: string) => void;
+  addUser: (newUser: User) => void;
 }
 
 export interface SearchProps {

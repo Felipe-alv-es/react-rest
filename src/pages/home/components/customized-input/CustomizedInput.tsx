@@ -16,6 +16,7 @@ export const CustomizedInput = ({
   filters,
   setFilters,
   handleFilterChange,
+  addUser,
 }: CustomizedInputProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -34,14 +35,16 @@ export const CustomizedInput = ({
           />
         ))}
       </Box>
-
       <CustomButton
         text="Adicionar usuário"
         icon={<FaPlus />}
         onClick={() => setIsModalOpen(true)}
       />
-
-      <AddUserModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <AddUserModal
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        addUser={addUser}
+      />
     </Box>
   );
 };

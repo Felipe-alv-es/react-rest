@@ -13,4 +13,5 @@ export interface UsersContextData {
   refresh: () => Promise<void>;
   sortUsers: (mode: "asc" | "desc" | "alph") => void;
   addUser: (newUser: User) => void;
+  removeUser: (id: number) => void;
 }
