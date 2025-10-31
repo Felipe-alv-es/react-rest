@@ -6,7 +6,7 @@ export const ThemeControl = () => {
   const { toggleColorMode, mode } = useCustomTheme();
 
   return (
-    <Box sx={{ position: "absolute", right: 50 }}>
+    <Box sx={{ position: "absolute", left: 50 }}>
       <IconButton
         onClick={toggleColorMode}
         sx={{
@@ -17,7 +17,7 @@ export const ThemeControl = () => {
         {mode === "dark" ? (
           <FaMoon size={64} color="lightBlue" />
         ) : (
-          <FaSun size={32} color="#FFDE21" />
+          <FaSun size={64} color="#FFDE21" />
         )}
       </IconButton>
     </Box>

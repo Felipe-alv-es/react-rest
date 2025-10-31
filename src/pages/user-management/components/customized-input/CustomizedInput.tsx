@@ -38,7 +38,7 @@ export const CustomizedInput = ({
       </Box>
       <CustomButton
         text="Adicionar usuário"
-        icon={<FaPlus />}
+        icon={<FaPlus size={18} />}
         onClick={() => setIsModalOpen(true)}
         ariaLabel="Adicionar usuário"
       />

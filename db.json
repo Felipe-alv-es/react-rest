@@ -68,7 +68,7 @@
       "name": "Leanne Graham",
       "username": "Bret",
       "email": "Sincere@april.biz",
-      "status": "Ativo"
+      "status": "Banido"
     },
     {
       "id": "12",
@@ -104,13 +104,6 @@
       "username": "Moriah.Stanton",
       "email": "Rey.Padberg@karina.biz",
       "status": "Pendente"
-    },
-    {
-      "id": "17",
-      "name": "teste ",
-      "username": "testetete",
-      "email": "testet@tetete.com",
-      "status": "Banido"
     }
   ]
 }

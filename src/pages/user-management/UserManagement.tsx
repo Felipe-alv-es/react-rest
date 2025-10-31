@@ -1,6 +1,6 @@
 import React from "react";
 import HomeFooter from "./components/home-footer/HomeFooter";
-import { Box, useTheme } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { getHomeStyle } from "./UserManagement.styles";
 import { HomeList, HomeTitle } from "./components/Index";
 import { useUsers } from "context/user-context/UserContext";
@@ -11,6 +11,7 @@ import { ThemeControl } from "@components/theme-control/ThemeControl";
 import Loading from "@components/loading/loading";
 
 const UserManagement = () => {
+  const isSmallScreen = useMediaQuery("(max-width:1400px)");
   const {
     users,
     loading,
@@ -40,7 +41,10 @@ const UserManagement = () => {
     currentItems: currentUsers,
     handlePageChange,
     resetPage,
-  } = usePagination({ data: filteredUsers, itemsPerPage: 10 });
+  } = usePagination({
+    data: filteredUsers,
+    itemsPerPage: isSmallScreen ? 4 : 10,
+  });
 
   const handleFilterChange = (key: string, value: string) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
