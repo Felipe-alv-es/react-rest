@@ -5,12 +5,12 @@ export default createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: "Kanit", serif;  
+        font-family: "kanit", serif;  
     }
 
     body {
         font-size: 16px;
-        background: #FFFFFF;
+        background: #F5F5F5;
         color: #383838;
     }
 

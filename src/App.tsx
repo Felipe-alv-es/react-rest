@@ -1,10 +1,11 @@
-import Home from "./pages/home/Home";
+import { UsersProvider } from "context/user-context/UserContext";
+import UserManagement from "./pages/user-management/UserManagement";
 
 function App() {
   return (
-    <div className="App">
-      <Home />
-    </div>
+    <UsersProvider>
+      <UserManagement />
+    </UsersProvider>
   );
 }
 
