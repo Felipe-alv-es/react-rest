@@ -63,12 +63,17 @@ export const UsersProvider: React.FC<UsersProviderProps> = ({ children }) => {
     });
   };
 
+  const addUser = (newUser: User) => {
+    setUsers((prev) => (prev ? [...prev, newUser] : [newUser]));
+  };
+
   const value: UsersContextData = {
     users,
     loading,
     error,
     refresh,
     sortUsers,
+    addUser,
   };
 
   return (

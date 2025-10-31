@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import HomeFooter from "./components/home-footer/HomeFooter";
 import { Box } from "@mui/material";
 import { getHomeStyle } from "./Home.styles";

@@ -3,9 +3,10 @@ import { Button } from "@mui/material";
 interface ButtonProps {
   text: string;
   icon?: React.ReactNode;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const CustomButton = ({ text, icon }: ButtonProps) => {
+export const CustomButton = ({ text, icon, onClick }: ButtonProps) => {
   return (
     <Button
       variant="contained"
@@ -17,10 +18,9 @@ const CustomButton = ({ text, icon }: ButtonProps) => {
         background: "#464646",
       }}
       endIcon={icon}
+      onClick={onClick}
     >
       {text}
     </Button>
   );
 };
-
-export default CustomButton;
