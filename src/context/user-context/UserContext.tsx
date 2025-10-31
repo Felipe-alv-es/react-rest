@@ -16,12 +16,18 @@ const fetchUsers = async (): Promise<User[]> => {
   return response.json();
 };
 
-const addUserApi = async (user: User) => {
+const addUserApi = async (user: Omit<User, "id">, currentUsers: User[]) => {
+  const maxId = currentUsers.length
+    ? Math.max(...currentUsers.map((u) => u.id))
+    : 0;
+
+  const newUser: User = { ...user, id: maxId + 1 };
   const response = await fetch(`${process.env.REACT_APP_API_URL}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(user),
+    body: JSON.stringify({ ...newUser, id: String(newUser.id) }),
   });
+
   if (!response.ok) throw new Error("Erro ao adicionar usuário");
   return response.json();
 };
@@ -58,8 +64,12 @@ export const UsersProvider: React.FC<UsersProviderProps> = ({ children }) => {
     staleTime: 1000 * 60,
   });
 
-  const addUserMutation = useMutation<User, Error, User>({
-    mutationFn: addUserApi,
+  const addUserMutation = useMutation<
+    User,
+    Error,
+    { user: Omit<User, "id">; currentUsers: User[] }
+  >({
+    mutationFn: ({ user, currentUsers }) => addUserApi(user, currentUsers),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }),
   });
 
@@ -85,7 +95,8 @@ export const UsersProvider: React.FC<UsersProviderProps> = ({ children }) => {
     queryClient.setQueryData(["users"], arr);
   };
 
-  const addUser = (user: User) => addUserMutation.mutate(user);
+  const addUser = (user: Omit<User, "id">) =>
+    addUserMutation.mutate({ user, currentUsers: users ?? [] });
   const editUser = (user: User) => editUserMutation.mutate(user);
   const removeUser = (id: number) => removeUserMutation.mutate(id);
 

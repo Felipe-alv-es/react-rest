@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 
 interface HomeTitleProps {
   title: string;
@@ -7,6 +7,8 @@ interface HomeTitleProps {
 
 const HomeTitle = ({ title, description }: HomeTitleProps) => {
   const theme = useTheme();
+  const isSmallScreen = useMediaQuery("(max-width:1400px)");
+
   return (
     <Box
       component="header"
@@ -17,7 +19,7 @@ const HomeTitle = ({ title, description }: HomeTitleProps) => {
     >
       <Typography
         component="h1"
-        variant="h2"
+        variant={isSmallScreen ? "h4" : "h2"}
         fontFamily="kanit"
         fontWeight={500}
         sx={{
@@ -28,7 +30,7 @@ const HomeTitle = ({ title, description }: HomeTitleProps) => {
       </Typography>
       <Typography
         component="p"
-        variant="h5"
+        variant={isSmallScreen ? "h6" : "h5"}
         fontFamily="kanit"
         fontWeight={400}
         sx={{
