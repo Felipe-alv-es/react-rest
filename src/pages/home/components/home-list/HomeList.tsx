@@ -26,10 +26,11 @@ const HomeList = ({ users }: HomeListTypes) => {
       <Box sx={getItemContainerStyle()}>
         {users?.map((user) => (
           <ListItem
+            key={user.id}
             name={user.name}
             username={user.username}
             email={user.email}
-            status={"Ativo"}
+            status={user.status}
           />
         ))}
       </Box>

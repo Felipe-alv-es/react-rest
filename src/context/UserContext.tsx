@@ -26,12 +26,7 @@ export const UsersProvider: React.FC<UsersProviderProps> = ({ children }) => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data: User[] = await response.json();
-      const usersWithStatus = data.map((user) => ({
-        ...user,
-        status: "Ativo",
-      }));
-
-      setUsers(usersWithStatus);
+      setUsers(data);
     } catch (err) {
       setError((err as Error).message);
     } finally {
