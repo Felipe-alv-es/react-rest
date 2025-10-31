@@ -10,7 +10,7 @@ import {
   getContainerStyle,
   getFilterOptionsStyle,
 } from "./CustomizedInput.styles";
-import { AddUserModal } from "../add-user-modal/AddUserModal";
+import { UserModal } from "../user-modal/UserModal";
 
 export const CustomizedInput = ({
   filters,
@@ -40,10 +40,11 @@ export const CustomizedInput = ({
         icon={<FaPlus />}
         onClick={() => setIsModalOpen(true)}
       />
-      <AddUserModal
+      <UserModal
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         addUser={addUser}
+        mode={"add"}
       />
     </Box>
   );

@@ -4,6 +4,8 @@ import { getListItemStyle } from "./ListItem.styles";
 import { FullWidthBox } from "@components/full-width-box/FullWidthBox";
 import React from "react";
 import { ConfirmModal } from "../remove-user-confirmation/RemoveUserConfirmation";
+import { User } from "context/types";
+import { UserModal } from "../user-modal/UserModal";
 
 interface ListItemProps {
   id: number;
@@ -12,6 +14,7 @@ interface ListItemProps {
   email: string;
   status: string;
   removeUser: (id: number) => void;
+  editUser: (updatedUser: User) => void;
 }
 
 const ListItem = ({
@@ -21,14 +24,18 @@ const ListItem = ({
   email,
   status,
   removeUser,
+  editUser,
 }: ListItemProps) => {
   const [openConfirm, setOpenConfirm] = React.useState(false);
+  const [openEdit, setOpenEdit] = React.useState(false);
+
   const handleDelete = () => setOpenConfirm(true);
   const handleConfirmDelete = () => {
     removeUser(id);
     setOpenConfirm(false);
   };
 
+  const handleEdit = () => setOpenEdit(true);
   const fields = [
     { label: name },
     { label: username },
@@ -61,7 +68,7 @@ const ListItem = ({
           <IconButton onClick={handleDelete}>
             <FaTrashAlt color="#990000" />
           </IconButton>
-          <IconButton>
+          <IconButton onClick={handleEdit}>
             <FaPencilAlt color="#383838" />
           </IconButton>
         </FullWidthBox>
@@ -71,8 +78,15 @@ const ListItem = ({
         onCancel={() => setOpenConfirm(false)}
         onConfirm={handleConfirmDelete}
         title="Excluir usuário"
-        message={`Deseja realmente excluir o usuário: `}
+        message="Deseja realmente excluir o usuário:"
         user={name}
+      />
+      <UserModal
+        open={openEdit}
+        onClose={() => setOpenEdit(false)}
+        mode="edit"
+        user={{ id, name, username, email, status }}
+        editUser={editUser}
       />
     </>
   );

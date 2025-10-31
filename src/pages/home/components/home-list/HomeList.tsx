@@ -12,9 +12,10 @@ import {
 interface HomeListTypes {
   users: User[];
   removeUser: (id: number) => void;
+  editUser: (updatedUser: User) => void;
 }
 
-const HomeList = ({ users, removeUser }: HomeListTypes) => {
+const HomeList = ({ users, removeUser, editUser }: HomeListTypes) => {
   return (
     <Box sx={getHomeListStyle()}>
       <Box sx={getListTitleStyle()}>
@@ -34,6 +35,7 @@ const HomeList = ({ users, removeUser }: HomeListTypes) => {
             email={user.email}
             status={user.status}
             removeUser={removeUser}
+            editUser={editUser}
           />
         ))}
       </Box>

@@ -9,8 +9,16 @@ import { useFilteredUsers } from "hooks/useFilteredUsers";
 import { usePagination } from "hooks/usePagination";
 
 const Home = () => {
-  const { users, loading, error, sortUsers, refresh, addUser, removeUser } =
-    useUsers();
+  const {
+    users,
+    loading,
+    error,
+    sortUsers,
+    refresh,
+    addUser,
+    removeUser,
+    editUser,
+  } = useUsers();
   const [filters, setFilters] = React.useState({
     order: "",
     status: "",
@@ -67,7 +75,11 @@ const Home = () => {
         handleFilterChange={handleFilterChange}
         addUser={addUser}
       />
-      <HomeList users={currentUsers} removeUser={removeUser} />
+      <HomeList
+        users={currentUsers}
+        removeUser={removeUser}
+        editUser={editUser}
+      />
       <HomeFooter
         totalPages={totalPages}
         currentPage={currentPage}

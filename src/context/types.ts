@@ -14,4 +14,5 @@ export interface UsersContextData {
   sortUsers: (mode: "asc" | "desc" | "alph") => void;
   addUser: (newUser: User) => void;
   removeUser: (id: number) => void;
+  editUser: (updatedUser: User) => void;
 }

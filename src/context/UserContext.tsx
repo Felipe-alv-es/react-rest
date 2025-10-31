@@ -70,6 +70,16 @@ export const UsersProvider: React.FC<UsersProviderProps> = ({ children }) => {
   const removeUser = (id: number) =>
     setUsers((prev) => prev.filter((user) => user.id !== id));
 
+  const editUser = (updatedUser: User) => {
+    setUsers((prev) =>
+      prev
+        ? prev.map((user) =>
+            user.id === updatedUser.id ? { ...user, ...updatedUser } : user
+          )
+        : prev
+    );
+  };
+
   const value: UsersContextData = {
     users,
     loading,
@@ -78,6 +88,7 @@ export const UsersProvider: React.FC<UsersProviderProps> = ({ children }) => {
     sortUsers,
     addUser,
     removeUser,
+    editUser,
   };
 
   return (
