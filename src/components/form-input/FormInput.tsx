@@ -1,4 +1,4 @@
-import { Paper, InputBase, Typography } from "@mui/material";
+import { Paper, InputBase, Typography, useTheme } from "@mui/material";
 import { getFormStyle, getInputStyle } from "./FormInput.styles";
 
 interface FormInputProps {
@@ -14,15 +14,17 @@ export const FormInput = ({
   error,
   placeholder,
 }: FormInputProps) => {
+  const theme = useTheme();
+
   return (
     <Paper
       component="form"
-      sx={getFormStyle()}
+      sx={getFormStyle(theme)}
       elevation={0}
       onSubmit={(e) => e.preventDefault()}
     >
       <InputBase
-        sx={getInputStyle()}
+        sx={getInputStyle(theme)}
         placeholder={placeholder}
         value={name}
         onChange={(e) => setName(e.target.value)}

@@ -1,10 +1,10 @@
 import React from "react";
-import { Box, Typography, IconButton, Chip } from "@mui/material";
+import { Box, Typography, IconButton, Chip, useTheme } from "@mui/material";
 import { FaTrash, FaPencilAlt } from "react-icons/fa";
 import { getListItemStyle } from "./ListItem.styles";
 import { FullWidthBox } from "@components/full-width-box/FullWidthBox";
 import { ConfirmModal } from "../remove-user-confirmation/RemoveUserConfirmation";
-import { User } from "context/types";
+import { User } from "context/user-context/types";
 import { UserModal } from "../user-modal/UserModal";
 
 interface ListItemProps {
@@ -26,6 +26,7 @@ const ListItem = ({
   removeUser,
   editUser,
 }: ListItemProps) => {
+  const theme = useTheme();
   const [openConfirm, setOpenConfirm] = React.useState(false);
   const [openEdit, setOpenEdit] = React.useState(false);
 
@@ -52,7 +53,16 @@ const ListItem = ({
       case "Ativo":
         return <Chip label={label} color="success" />;
       default:
-        return <Typography>{label}</Typography>;
+        return (
+          <Typography
+            sx={{
+              color: theme.palette.text.primary,
+              fontFamily: "kanit",
+            }}
+          >
+            {label}
+          </Typography>
+        );
     }
   };
 
@@ -69,7 +79,7 @@ const ListItem = ({
             <FaTrash color="#990000" />
           </IconButton>
           <IconButton onClick={handleEdit} data-testid="edit-button">
-            <FaPencilAlt color="#383838" />
+            <FaPencilAlt color={theme.palette.text.primary} />
           </IconButton>
         </FullWidthBox>
       </Box>

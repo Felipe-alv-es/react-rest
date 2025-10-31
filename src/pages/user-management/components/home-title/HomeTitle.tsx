@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 
 interface HomeTitleProps {
   title: string;
@@ -6,17 +6,32 @@ interface HomeTitleProps {
 }
 
 const HomeTitle = ({ title, description }: HomeTitleProps) => {
+  const theme = useTheme();
   return (
     <Box
       sx={{
-        paddingY: "16px",
+        py: 2,
         textAlign: "center",
       }}
     >
-      <Typography variant="h2" fontFamily={"kanit"} fontWeight={500}>
+      <Typography
+        variant="h2"
+        fontFamily="kanit"
+        fontWeight={500}
+        sx={{
+          color: theme.palette.text.primary,
+        }}
+      >
         {title}
       </Typography>
-      <Typography variant="h5" fontFamily={"kanit"} fontWeight={"400"}>
+      <Typography
+        variant="h5"
+        fontFamily="kanit"
+        fontWeight={400}
+        sx={{
+          color: theme.palette.text.secondary,
+        }}
+      >
         {description}
       </Typography>
     </Box>

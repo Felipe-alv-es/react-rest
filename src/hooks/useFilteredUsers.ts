@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { User } from "context/types";
+import { User } from "context/user-context/types";
 
 interface UseFilteredUsersProps {
   users: User[] | null;

@@ -1,7 +1,7 @@
 import ListItem from "../list-Item/ListItem";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { FullWidthBox } from "@components/full-width-box/FullWidthBox";
-import { User } from "context/types";
+import { User } from "context/user-context/types";
 import { listLabel } from "utils/listLabel";
 import {
   getHomeListStyle,
@@ -16,16 +16,17 @@ interface HomeListTypes {
 }
 
 const HomeList = ({ users, removeUser, editUser }: HomeListTypes) => {
+  const theme = useTheme();
   return (
-    <Box sx={getHomeListStyle()}>
-      <Box sx={getListTitleStyle()}>
+    <Box sx={getHomeListStyle(theme)}>
+      <Box sx={getListTitleStyle(theme)}>
         {listLabel.map((item) => (
           <FullWidthBox key={item}>
-            <Typography sx={getTypographyStyle()}>{item}</Typography>
+            <Typography sx={getTypographyStyle(theme)}>{item}</Typography>
           </FullWidthBox>
         ))}
       </Box>
-      <Box sx={getItemContainerStyle()}>
+      <Box sx={getItemContainerStyle(theme)}>
         {users?.map((user) => (
           <ListItem
             key={user.id}

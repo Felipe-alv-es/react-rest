@@ -1,20 +1,25 @@
-import { SxProps } from "@mui/material";
+import { SxProps, Theme } from "@mui/material";
 
-export const getModalStyle = (): SxProps => ({
-  backgroundColor: "#F5F5F5",
-  borderRadius: "16px",
-  padding: "48px 32px",
+export const getModalStyle = (theme: Theme): SxProps => ({
+  backgroundColor:
+    theme.palette.mode === "dark"
+      ? theme.palette.background.paper
+      : theme.palette.background.default,
+  borderRadius: 16,
+  p: theme.spacing(6, 4),
   maxWidth: 500,
   mx: "auto",
   mt: "10%",
   display: "flex",
   flexDirection: "column",
-  gap: 2,
+  gap: theme.spacing(2),
+  boxShadow: theme.shadows[3],
 });
 
-export const getTitleStyle = (): SxProps => ({
+export const getTitleStyle = (theme: Theme): SxProps => ({
   typography: "h5",
   fontFamily: "kanit",
-  fontWeight: "400",
+  fontWeight: 400,
   textAlign: "center",
+  color: theme.palette.text.primary,
 });

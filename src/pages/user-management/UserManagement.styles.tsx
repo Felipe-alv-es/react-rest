@@ -1,9 +1,10 @@
-import { SxProps } from "@mui/material";
+import { SxProps, Theme } from "@mui/material";
 
-export const getHomeStyle = (): SxProps => ({
+export const getHomeStyle = (theme: Theme): SxProps => ({
   height: "100vh",
-  padding: "32px",
+  padding: theme.spacing(4),
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
+  backgroundColor: theme.palette.background.default,
 });

@@ -1,12 +1,13 @@
 import React from "react";
 import HomeFooter from "./components/home-footer/HomeFooter";
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import { getHomeStyle } from "./UserManagement.styles";
 import { HomeList, HomeTitle } from "./components/Index";
-import { useUsers } from "context/UserContext";
+import { useUsers } from "context/user-context/UserContext";
 import { CustomizedInput } from "./components/customized-input/CustomizedInput";
 import { useFilteredUsers } from "hooks/useFilteredUsers";
 import { usePagination } from "hooks/usePagination";
+import { ThemeControl } from "@components/theme-control/ThemeControl";
 
 const UserManagement = () => {
   const {
@@ -19,6 +20,7 @@ const UserManagement = () => {
     removeUser,
     editUser,
   } = useUsers();
+  const theme = useTheme();
   const [filters, setFilters] = React.useState({
     order: "",
     status: "",
@@ -64,7 +66,8 @@ const UserManagement = () => {
   if (error) return <Box>Erro: {error}</Box>;
 
   return (
-    <Box sx={getHomeStyle()}>
+    <Box sx={getHomeStyle(theme)}>
+      <ThemeControl />
       <HomeTitle
         title="Gerenciamento de usuários"
         description="Gerencie todos os usuários neste local, crie, edite e exclua-os conforme necessário."

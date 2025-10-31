@@ -1,4 +1,4 @@
-import { UsersProvider } from "context/UserContext";
+import { UsersProvider } from "context/user-context/UserContext";
 import UserManagement from "./pages/user-management/UserManagement";
 
 function App() {

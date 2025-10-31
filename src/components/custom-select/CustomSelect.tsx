@@ -7,6 +7,7 @@ import {
   IconButton,
   MenuItem,
   Icon,
+  useTheme,
 } from "@mui/material";
 import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
 import { LuUserRound } from "react-icons/lu";
@@ -24,6 +25,7 @@ export const CustomSelect: React.FC<{
   onChange: (value: string) => void;
   width?: string | number;
 }> = ({ options, placeholder = "Name", value, onChange, width = 150 }) => {
+  const theme = useTheme();
   const [open, setOpen] = useState(false);
   const handleSelect = (newValue: string) => {
     onChange(newValue);
@@ -35,13 +37,13 @@ export const CustomSelect: React.FC<{
       <Box position="relative" sx={{ width }}>
         <Paper
           onClick={() => setOpen((prev) => !prev)}
-          sx={getCustomSelectStyle()}
+          sx={getCustomSelectStyle(theme)}
           elevation={0}
         >
-          <Icon sx={getIconStyle()}>
+          <Icon sx={getIconStyle(theme)}>
             <LuUserRound size={18} />
           </Icon>
-          <Typography sx={getOptionsTextStyle()}>
+          <Typography sx={getOptionsTextStyle(theme)}>
             {value
               ? options.find((opt) => opt.value === value)?.label
               : placeholder}
@@ -51,7 +53,7 @@ export const CustomSelect: React.FC<{
           </IconButton>
         </Paper>
         {open && (
-          <Paper sx={getOptionsStyle()}>
+          <Paper sx={getOptionsStyle(theme)}>
             {options.map((opt) => (
               <MenuItem
                 key={opt.value}

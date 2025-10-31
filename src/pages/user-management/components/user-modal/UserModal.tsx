@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Box, Typography } from "@mui/material";
+import { Modal, Box, Typography, useTheme } from "@mui/material";
 import { FormInput } from "@components/form-input/FormInput";
 import { CustomSelect } from "@components/custom-select/CustomSelect";
 import { getModalStyle, getTitleStyle } from "./UserModal.styles";
 import { CustomButton } from "@components/custom-button/CustomButton";
-import { User } from "context/types";
+import { User } from "context/user-context/types";
 
 interface UserModalProps {
   open: boolean;
@@ -23,6 +23,7 @@ export const UserModal: React.FC<UserModalProps> = ({
   editUser,
   user,
 }) => {
+  const theme = useTheme();
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -94,8 +95,8 @@ export const UserModal: React.FC<UserModalProps> = ({
 
   return (
     <Modal open={open} onClose={onClose}>
-      <Box sx={getModalStyle()}>
-        <Typography sx={getTitleStyle()}>
+      <Box sx={getModalStyle(theme)}>
+        <Typography sx={getTitleStyle(theme)}>
           {mode === "add" ? "Adicionar novo usuário" : "Editar usuário"}
         </Typography>
 

@@ -1,6 +1,6 @@
 // __mocks__/useUsers.ts
 import React from "react";
-import { User } from "context/types";
+import { User } from "context/user-context/types";
 
 export const useUsers = () => {
   const [users, setUsers] = React.useState<User[]>([

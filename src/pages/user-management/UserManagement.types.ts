@@ -1,4 +1,4 @@
-import { User } from "context/types";
+import { User } from "context/user-context/types";
 
 export interface CustomizedInputProps {
   filters: {

@@ -1,18 +1,19 @@
-import { Paper, InputBase, IconButton } from "@mui/material";
+import { Paper, InputBase, IconButton, useTheme } from "@mui/material";
 import { IoMdSearch } from "react-icons/io";
 import { getSearchInputStyle, getSearchStyle } from "./Search.styles";
 import { SearchProps } from "pages/user-management/UserManagement.types";
 
 export const Search = ({ filters, setFilters }: SearchProps) => {
+  const theme = useTheme();
   return (
     <Paper
       component="form"
-      sx={getSearchStyle()}
+      sx={getSearchStyle(theme)}
       elevation={0}
       onSubmit={(e) => e.preventDefault()}
     >
       <InputBase
-        sx={getSearchInputStyle()}
+        sx={getSearchInputStyle(theme)}
         placeholder="Buscar usuário..."
         value={filters.search}
         onChange={(e) =>
