@@ -1,10 +1,10 @@
 import { UsersProvider } from "context/UserContext";
-import Home from "./pages/home/Home";
+import UserManagement from "./pages/user-management/UserManagement";
 
 function App() {
   return (
     <UsersProvider>
-      <Home />
+      <UserManagement />
     </UsersProvider>
   );
 }

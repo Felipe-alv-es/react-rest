@@ -4,7 +4,7 @@ import { FaPlus } from "react-icons/fa";
 import { CustomButton } from "@components/custom-button/CustomButton";
 import { Search } from "../search/Search";
 import { filterConfigs } from "utils/filterOptions";
-import { CustomizedInputProps } from "pages/home/Home.types";
+import { CustomizedInputProps } from "pages/user-management/UserManagement.types";
 import { useState } from "react";
 import {
   getContainerStyle,

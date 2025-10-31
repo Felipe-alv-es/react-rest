@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import HomeFooter from "./components/home-footer/HomeFooter";
 import { Box } from "@mui/material";
-import { getHomeStyle } from "./Home.styles";
+import { getHomeStyle } from "./UserManagement.styles";
 import { HomeList, HomeTitle } from "./components/Index";
 import { useUsers } from "context/UserContext";
 import { CustomizedInput } from "./components/customized-input/CustomizedInput";
 import { useFilteredUsers } from "hooks/useFilteredUsers";
 import { usePagination } from "hooks/usePagination";
 
-const Home = () => {
+const UserManagement = () => {
   const {
     users,
     loading,
@@ -89,4 +89,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default UserManagement;

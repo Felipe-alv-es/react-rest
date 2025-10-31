@@ -1,7 +1,7 @@
 import { Paper, InputBase, IconButton } from "@mui/material";
 import { IoMdSearch } from "react-icons/io";
 import { getSearchInputStyle, getSearchStyle } from "./Search.styles";
-import { SearchProps } from "pages/home/Home.types";
+import { SearchProps } from "pages/user-management/UserManagement.types";
 
 export const Search = ({ filters, setFilters }: SearchProps) => {
   return (
