@@ -1,90 +1,99 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  ReactNode,
-} from "react";
+import React, { createContext, useContext, ReactNode } from "react";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { User, UsersContextData } from "./types";
 
 const UsersContext = createContext<UsersContextData | undefined>(undefined);
+
 interface UsersProviderProps {
   children: ReactNode;
 }
 
+const fetchUsers = async (): Promise<User[]> => {
+  const response = await fetch(process.env.REACT_APP_API_URL!);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  return response.json();
+};
+
+const addUserApi = async (user: User) => {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user),
+  });
+  if (!response.ok) throw new Error("Erro ao adicionar usuário");
+  return response.json();
+};
+
+const updateUserApi = async (user: User) => {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/${user.id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user),
+  });
+  if (!response.ok) throw new Error("Erro ao atualizar usuário");
+  return response.json();
+};
+
+const removeUserApi = async (id: number) => {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/${id}`, {
+    method: "DELETE",
+  });
+  if (!response.ok) throw new Error("Erro ao remover usuário");
+  return id;
+};
+
 export const UsersProvider: React.FC<UsersProviderProps> = ({ children }) => {
-  const [users, setUsers] = useState<User[] | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const queryClient = useQueryClient();
+  const {
+    data: users,
+    isLoading,
+    error,
+    refetch,
+  } = useQuery<User[], Error>({
+    queryKey: ["users"],
+    queryFn: fetchUsers,
+    refetchOnWindowFocus: true,
+    staleTime: 1000 * 60,
+  });
 
-  const fetchUsers = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(process.env.REACT_APP_API_URL);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data: User[] = await response.json();
-      setUsers(data);
-    } catch (err) {
-      setError((err as Error).message);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const addUserMutation = useMutation<User, Error, User>({
+    mutationFn: addUserApi,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }),
+  });
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+  const editUserMutation = useMutation<User, Error, User>({
+    mutationFn: updateUserApi,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }),
+  });
 
-  const refresh = async () => {
-    await fetchUsers();
-  };
+  const removeUserMutation = useMutation<number, Error, number>({
+    mutationFn: removeUserApi,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }),
+  });
 
   const sortUsers = (mode: "alph" | "asc" | "desc") => {
-    setUsers((prev) => {
-      if (!prev) return prev;
-      const arr = [...prev];
-      if (mode === "alph") {
-        arr.sort((a, b) =>
-          a.name.localeCompare(b.name, "pt-BR", { sensitivity: "base" })
-        );
-        return arr;
-      }
-      if (mode === "asc") {
-        return arr.sort((a, b) => a.id - b.id);
-      }
-      if (mode === "desc") {
-        return arr.sort((a, b) => b.id - a.id);
-      }
-
-      return arr;
-    });
+    if (!users) return;
+    const arr = [...users];
+    if (mode === "alph")
+      arr.sort((a, b) =>
+        a.name.localeCompare(b.name, "pt-BR", { sensitivity: "base" })
+      );
+    if (mode === "asc") arr.sort((a, b) => a.id - b.id);
+    if (mode === "desc") arr.sort((a, b) => b.id - a.id);
+    queryClient.setQueryData(["users"], arr);
   };
 
-  const addUser = (newUser: User) => {
-    setUsers((prev) => (prev ? [...prev, newUser] : [newUser]));
-  };
-
-  const removeUser = (id: number) =>
-    setUsers((prev) => prev.filter((user) => user.id !== id));
-
-  const editUser = (updatedUser: User) => {
-    setUsers((prev) =>
-      prev
-        ? prev.map((user) =>
-            user.id === updatedUser.id ? { ...user, ...updatedUser } : user
-          )
-        : prev
-    );
-  };
+  const addUser = (user: User) => addUserMutation.mutate(user);
+  const editUser = (user: User) => editUserMutation.mutate(user);
+  const removeUser = (id: number) => removeUserMutation.mutate(id);
 
   const value: UsersContextData = {
-    users,
-    loading,
-    error,
-    refresh,
+    users: users ?? [],
+    loading: isLoading,
+    error: error?.message ?? null,
+    refresh: () => refetch().then(() => {}),
     sortUsers,
     addUser,
     removeUser,
@@ -98,8 +107,6 @@ export const UsersProvider: React.FC<UsersProviderProps> = ({ children }) => {
 
 export const useUsers = (): UsersContextData => {
   const context = useContext(UsersContext);
-  if (!context) {
-    throw new Error("useUsers must be used within a UsersProvider");
-  }
+  if (!context) throw new Error("useUsers must be used within a UsersProvider");
   return context;
 };
