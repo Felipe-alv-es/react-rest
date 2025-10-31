@@ -1,10 +1,37 @@
 import { Box, Pagination } from "@mui/material";
 import { getFooterStyle } from "./HomeFooter.styles";
 
-const HomeFooter = () => {
+interface HomeFooterProps {
+  totalPages: number;
+  currentPage: number;
+  handlePageChange: (event: React.ChangeEvent<unknown>, value: number) => void;
+}
+
+const HomeFooter = ({
+  totalPages,
+  currentPage,
+  handlePageChange,
+}: HomeFooterProps) => {
   return (
     <Box sx={getFooterStyle}>
-      <Pagination />
+      <Pagination
+        count={totalPages}
+        page={currentPage}
+        onChange={handlePageChange}
+        sx={{
+          "& .MuiPaginationItem-root": {
+            color: "gray",
+          },
+          "& .MuiPaginationItem-root.Mui-selected": {
+            backgroundColor: "#464646",
+            color: "#fff",
+            fontWeight: "bold",
+            "&:hover": {
+              backgroundColor: "#464646",
+            },
+          },
+        }}
+      />
     </Box>
   );
 };

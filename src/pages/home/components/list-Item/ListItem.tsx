@@ -9,6 +9,9 @@ interface ListItemProps {
   email: string;
   status: string;
 }
+interface StatusLabelProps {
+  label: string;
+}
 
 const ListItem = ({ name, username, email, status }: ListItemProps) => {
   const fields = [
@@ -17,10 +20,6 @@ const ListItem = ({ name, username, email, status }: ListItemProps) => {
     { label: email },
     { label: status },
   ];
-
-  interface StatusLabelProps {
-    label: string;
-  }
 
   const LabelComponent: React.FC<StatusLabelProps> = ({ label }) => {
     switch (label) {

@@ -1,1 +1,1 @@
-export const listLabel = ["Name", "Username", "Email", "Status", "Actions"];
+export const listLabel = ["Nome", "Usuário", "Email", "Status", "Ações"];

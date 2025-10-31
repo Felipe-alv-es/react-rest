@@ -11,8 +11,7 @@ export interface CustomizedInputProps {
       search: string;
     }>
   >;
-  sortUsers: (mode: "asc" | "desc" | "alph") => void;
-  refresh: () => Promise<void>;
+  handleFilterChange: (key: string, value: string) => void;
 }
 
 export interface SearchProps {

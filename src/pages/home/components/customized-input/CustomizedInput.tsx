@@ -13,29 +13,8 @@ import { CustomizedInputProps } from "pages/home/Home.types";
 export const CustomizedInput = ({
   filters,
   setFilters,
-  sortUsers,
-  refresh,
+  handleFilterChange,
 }: CustomizedInputProps) => {
-  const handleFilterChange = (key: string, value: string) => {
-    setFilters((prev) => ({ ...prev, [key]: value }));
-    if (key === "order") {
-      switch (value) {
-        case "alph":
-          sortUsers("alph");
-          break;
-        case "asc":
-          sortUsers("asc");
-          break;
-        case "desc":
-          sortUsers("desc");
-          break;
-        default:
-          refresh();
-          break;
-      }
-    }
-  };
-
   return (
     <Box sx={getContainerStyle()}>
       <Box sx={getFilterOptionsStyle()}>
@@ -51,7 +30,7 @@ export const CustomizedInput = ({
           />
         ))}
       </Box>
-      <CustomButton text="Add user" icon={<FaPlus />} />
+      <CustomButton text="Adicionar usuário" icon={<FaPlus />} />
     </Box>
   );
 };
