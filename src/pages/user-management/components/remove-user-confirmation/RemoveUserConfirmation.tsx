@@ -1,4 +1,4 @@
-import { Modal, Box, Typography } from "@mui/material";
+import { Modal, Box, Typography, useTheme } from "@mui/material";
 import { CustomButton } from "@components/custom-button/CustomButton";
 import { getModalStyle } from "./RemoveUserConfirmation.styles";
 
@@ -19,13 +19,21 @@ export const ConfirmModal = ({
   onConfirm,
   onCancel,
 }: ConfirmModalProps) => {
+  const theme = useTheme();
   return (
     <Modal open={open} onClose={onCancel}>
-      <Box sx={getModalStyle()}>
-        <Typography variant="h6" gutterBottom>
+      <Box sx={getModalStyle(theme)}>
+        <Typography
+          variant="h6"
+          gutterBottom
+          sx={{ color: theme.palette.text.primary }}
+        >
           {title}
         </Typography>
-        <Typography variant="body1" sx={{ marginBottom: 1 }}>
+        <Typography
+          variant="body1"
+          sx={{ mb: 1, color: theme.palette.text.secondary }}
+        >
           {message}
         </Typography>
         <Typography sx={{ marginBottom: 2, fontWeight: "600", color: "coral" }}>
