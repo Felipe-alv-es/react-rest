@@ -24,7 +24,15 @@ export const CustomSelect: React.FC<{
   value: string;
   onChange: (value: string) => void;
   width?: string | number;
-}> = ({ options, placeholder = "Name", value, onChange, width = 150 }) => {
+  ariaLabel?: string;
+}> = ({
+  options,
+  placeholder = "Name",
+  value,
+  onChange,
+  width = 150,
+  ariaLabel,
+}) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const handleSelect = (newValue: string) => {
@@ -39,6 +47,7 @@ export const CustomSelect: React.FC<{
           onClick={() => setOpen((prev) => !prev)}
           sx={getCustomSelectStyle(theme)}
           elevation={0}
+          aria-label={ariaLabel}
         >
           <Icon sx={getIconStyle(theme)}>
             <LuUserRound size={18} />

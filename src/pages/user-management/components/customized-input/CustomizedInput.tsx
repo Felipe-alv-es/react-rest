@@ -32,6 +32,7 @@ export const CustomizedInput = ({
             placeholder={placeholder}
             options={options}
             width={key === "order" ? 180 : 160}
+            ariaLabel={filters[key as keyof typeof filters]}
           />
         ))}
       </Box>
@@ -39,6 +40,7 @@ export const CustomizedInput = ({
         text="Adicionar usuário"
         icon={<FaPlus />}
         onClick={() => setIsModalOpen(true)}
+        ariaLabel="Adicionar usuário"
       />
       <UserModal
         open={isModalOpen}

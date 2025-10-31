@@ -31,6 +31,7 @@ const HomeFooter = ({
             },
           },
         }}
+        aria-label="Paginação de usuários"
       />
     </Box>
   );

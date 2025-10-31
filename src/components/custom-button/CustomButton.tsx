@@ -4,9 +4,15 @@ interface ButtonProps {
   text: string;
   icon?: React.ReactNode;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  ariaLabel?: string;
 }
 
-export const CustomButton = ({ text, icon, onClick }: ButtonProps) => {
+export const CustomButton = ({
+  text,
+  icon,
+  onClick,
+  ariaLabel,
+}: ButtonProps) => {
   const theme = useTheme();
   const backgroundColor =
     theme.palette.mode === "dark"
@@ -30,9 +36,14 @@ export const CustomButton = ({ text, icon, onClick }: ButtonProps) => {
               ? theme.palette.grey[600]
               : theme.palette.grey[900],
         },
+        "&:focus-visible": {
+          outline: `3px solid ${theme.palette.primary.main}`,
+          outlineOffset: 2,
+        },
       }}
       endIcon={icon}
       onClick={onClick}
+      aria-label={ariaLabel || text}
     >
       {text}
     </Button>

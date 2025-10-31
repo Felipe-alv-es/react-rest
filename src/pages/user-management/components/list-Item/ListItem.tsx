@@ -47,7 +47,13 @@ const ListItem = ({
   const LabelComponent: React.FC<{ label: string }> = ({ label }) => {
     switch (label) {
       case "Banido":
-        return <Chip label={label} color="error" />;
+        return (
+          <Chip
+            label={label}
+            color="error"
+            aria-label={`Status do usuário: ${label}`}
+          />
+        );
       case "Pendente":
         return (
           <Chip
@@ -91,10 +97,18 @@ const ListItem = ({
           </FullWidthBox>
         ))}
         <FullWidthBox>
-          <IconButton onClick={handleDelete} data-testid="delete-button">
+          <IconButton
+            onClick={handleDelete}
+            data-testid="delete-button"
+            aria-label={`Excluir usuário ${name}`}
+          >
             <FaTrash color="#990000" />
           </IconButton>
-          <IconButton onClick={handleEdit} data-testid="edit-button">
+          <IconButton
+            onClick={handleEdit}
+            data-testid="edit-button"
+            aria-label={`Editar usuário ${name}`}
+          >
             <FaPencilAlt color={theme.palette.text.primary} />
           </IconButton>
         </FullWidthBox>

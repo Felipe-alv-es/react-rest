@@ -9,12 +9,14 @@ const HomeTitle = ({ title, description }: HomeTitleProps) => {
   const theme = useTheme();
   return (
     <Box
+      component="header"
       sx={{
         py: 2,
         textAlign: "center",
       }}
     >
       <Typography
+        component="h1"
         variant="h2"
         fontFamily="kanit"
         fontWeight={500}
@@ -25,6 +27,7 @@ const HomeTitle = ({ title, description }: HomeTitleProps) => {
         {title}
       </Typography>
       <Typography
+        component="p"
         variant="h5"
         fontFamily="kanit"
         fontWeight={400}

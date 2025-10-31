@@ -60,9 +60,8 @@ export const UserModal: React.FC<UserModalProps> = ({
     if (!email.trim()) newErrors.email = "E-mail é obrigatório.";
     else {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
+      if (!emailRegex.test(email))
         newErrors.email = "Formato de e-mail inválido.";
-      }
     }
 
     setErrors(newErrors);
@@ -94,9 +93,14 @@ export const UserModal: React.FC<UserModalProps> = ({
   };
 
   return (
-    <Modal open={open} onClose={onClose}>
+    <Modal
+      open={open}
+      onClose={onClose}
+      aria-labelledby="user-modal-title"
+      aria-describedby="user-modal-description"
+    >
       <Box sx={getModalStyle(theme)}>
-        <Typography sx={getTitleStyle(theme)}>
+        <Typography id="user-modal-title" sx={getTitleStyle(theme)}>
           {mode === "add" ? "Adicionar novo usuário" : "Editar usuário"}
         </Typography>
 
@@ -105,19 +109,39 @@ export const UserModal: React.FC<UserModalProps> = ({
           setName={setName}
           error={errors.name}
           placeholder="Nome"
+          aria-describedby={errors.name ? "error-name" : undefined}
         />
+        {errors.name && (
+          <Typography id="error-name" color="error" variant="body2">
+            {errors.name}
+          </Typography>
+        )}
+
         <FormInput
           name={username}
           setName={setUsername}
           error={errors.username}
           placeholder="Username"
+          aria-describedby={errors.username ? "error-username" : undefined}
         />
+        {errors.username && (
+          <Typography id="error-username" color="error" variant="body2">
+            {errors.username}
+          </Typography>
+        )}
+
         <FormInput
           name={email}
           setName={setEmail}
           error={errors.email}
           placeholder="E-mail"
+          aria-describedby={errors.email ? "error-email" : undefined}
         />
+        {errors.email && (
+          <Typography id="error-email" color="error" variant="body2">
+            {errors.email}
+          </Typography>
+        )}
 
         <CustomSelect
           value={status}
@@ -127,13 +151,19 @@ export const UserModal: React.FC<UserModalProps> = ({
           placeholder="Status"
           options={userStatus}
           width="100%"
+          ariaLabel="Status do usuário"
         />
 
-        <Box sx={{ display: "flex", justifyContent: "center", gap: 2 }}>
-          <CustomButton text="Cancelar" onClick={onClose} />
+        <Box sx={{ display: "flex", justifyContent: "center", gap: 2, mt: 2 }}>
+          <CustomButton
+            text="Cancelar"
+            onClick={onClose}
+            ariaLabel="Cancelar"
+          />
           <CustomButton
             text={mode === "add" ? "Salvar" : "Atualizar"}
             onClick={handleSave}
+            ariaLabel={mode === "add" ? "Salvar usuário" : "Atualizar usuário"}
           />
         </Box>
       </Box>
