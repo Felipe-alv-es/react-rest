@@ -8,6 +8,7 @@ import { CustomizedInput } from "./components/customized-input/CustomizedInput";
 import { useFilteredUsers } from "hooks/useFilteredUsers";
 import { usePagination } from "hooks/usePagination";
 import { ThemeControl } from "@components/theme-control/ThemeControl";
+import Loading from "@components/loading/loading";
 
 const UserManagement = () => {
   const {
@@ -62,7 +63,9 @@ const UserManagement = () => {
     resetPage();
   };
 
-  if (loading) return <Box>Carregando usuários...</Box>;
+  if (loading) {
+    return <Loading />;
+  }
   if (error) return <Box>Erro: {error}</Box>;
 
   return (
