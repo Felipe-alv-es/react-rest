@@ -109,39 +109,21 @@ export const UserModal: React.FC<UserModalProps> = ({
           setName={setName}
           error={errors.name}
           placeholder="Nome"
-          aria-describedby={errors.name ? "error-name" : undefined}
         />
-        {errors.name && (
-          <Typography id="error-name" color="error" variant="body2">
-            {errors.name}
-          </Typography>
-        )}
 
         <FormInput
           name={username}
           setName={setUsername}
           error={errors.username}
           placeholder="Username"
-          aria-describedby={errors.username ? "error-username" : undefined}
         />
-        {errors.username && (
-          <Typography id="error-username" color="error" variant="body2">
-            {errors.username}
-          </Typography>
-        )}
 
         <FormInput
           name={email}
           setName={setEmail}
           error={errors.email}
           placeholder="E-mail"
-          aria-describedby={errors.email ? "error-email" : undefined}
         />
-        {errors.email && (
-          <Typography id="error-email" color="error" variant="body2">
-            {errors.email}
-          </Typography>
-        )}
 
         <CustomSelect
           value={status}
